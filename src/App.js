@@ -9,18 +9,16 @@ class App extends Component {
     this.state = {numero : 0};
   }
   handleClick(x) {
-    if (this.state === 'Dario'){
+    if (x.nomi === 'Dario'){
       this.setState({numero: 1});
     }else{
       console.log('test');
     }
-    
   }
 
   render() { 
     let valore;
     let immagine;
-    let numero;
     let nomi = ['Simone', 'Dario', 'Michele','Laura'];
     const listItems = nomi.map((nomi) => <button type="button" className="App-button" title="Mostra info dipendente" onClick={() => this.handleClick({nomi})}>{nomi}</button>);
     switch (this.state.numero) {
