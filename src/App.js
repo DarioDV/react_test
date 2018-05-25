@@ -8,30 +8,33 @@ class App extends Component {
     super(props);
     this.state = {numero : 0};
   }
-  handleClickD() {
-    this.setState({numero : 1});
-  }
-  handleClickM() {
-    this.setState({numero : 2});
-  }
-  handleClickS() {
-    this.setState({numero : 3});
+  handleClick(x) {
+    if (this.state === 'Dario'){
+      this.setState({numero: 1});
+    }else{
+      console.log('test');
+    }
+    
   }
 
   render() { 
     let valore;
     let immagine;
-    if (this.state.numero === 0) {
-      valore = <small></small>;
-    } else if (this.state.numero === 1){
-      valore = <small>Dario Della Vecchia <br/> Front-End <br/> test@almaviva.it <br/></small>;
-      immagine = <img src={DT} className="App-logo" alt="logo" />;
-    } else if (this.state.numero ===2) {
-      valore = <small>Michele Curci <br/> Back-End <br/> test@almaviva.it <br/></small>;
-      immagine = <img src={DT} className="App-logo" alt="logo" />;
-    }else{
-      valore = <small>Simone Marzoli <br/> Full-Stack <br/> test@almaviva.it <br/></small>;
-    }
+    let numero;
+    let nomi = ['Simone', 'Dario', 'Michele','Laura'];
+    const listItems = nomi.map((nomi) => <button type="button" className="App-button" title="Mostra info dipendente" onClick={() => this.handleClick({nomi})}>{nomi}</button>);
+    switch (this.state.numero) {
+        case 1: valore = <small>Dario Della Vecchia <br/> Front-End <br/> test@almaviva.it <br/></small>;
+                immagine = <img src={DT} className="App-logo" alt="logo" />;
+                break;
+        case 2: valore = <small>Michele Curci <br/> Back-End <br/> test@almaviva.it <br/></small>;
+                immagine = <img src={DT} className="App-logo" alt="logo" />;       
+                break;
+        case 3: valore = <small>Simone Marzoli <br/> Full-Stack <br/> test@almaviva.it <br/></small>;
+                break;
+        default:valore = <small></small>;
+      }
+
   return (
     <div className="App">
       <header className="App-header">
@@ -45,9 +48,7 @@ class App extends Component {
         Maggiori info su <a href="http://giotto.almaviva.it/">AlmavivA Giotto</a>
           </p>
         <div className="App-div">
-        <button type="button" className="App-button" title="Clicca per mostrare Dario" onClick={() => this.handleClickD()}>Dario</button>
-        <button type="button" className="App-button" title="Clicca per mostrare Michele" onClick={() => this.handleClickM()}>Michele</button>
-        <button type="button" className="App-button" title="Clicca per mostrare Michele" onClick={() => this.handleClickS()}>Simone</button>
+        {listItems}
         <p className="App-p">{valore}{immagine}</p>
         </div>
       </div>
